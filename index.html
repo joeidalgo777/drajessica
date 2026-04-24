@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dra. Jessica Toledo</title>
+<title>Dra. Jessica Toledo | Estética Avançada & Fisioterapia</title>
+<meta name="description" content="Dra. Jessica Toledo — Fisioterapeuta e Esteticista especialista em Microagulhamento, Toxina Botulínica e Recuperação Pós-Cirúrgica. Agende sua avaliação gratuita!">
+<meta property="og:title" content="Dra. Jessica Toledo | Estética Avançada & Fisioterapia">
+<meta property="og:description" content="Especialista em Microagulhamento, Botox e Pós-Operatório. Resultados naturais com ciência e cuidado profissional. Agende sua avaliação gratuita!">
+<meta property="og:image" content="https://raw.githubusercontent.com/joeidalgo777/drajessica/refs/heads/main/IMG_0458.jpg">
+<meta property="og:url" content="https://joeidalgo777.github.io/drajessica/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dra. Jessica Toledo | Estética Avançada">
+<meta name="twitter:description" content="Especialista em Microagulhamento, Botox e Pós-Operatório. Agende sua avaliação gratuita!">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/joeidalgo777/drajessica/refs/heads/main/IMG_0458.jpg">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -391,6 +402,113 @@
     .cta-btn-primary, .cta-btn-secondary { justify-content: center; }
   }
 
+
+  /* PROGRESS BAR */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 999;
+    height: 2px; width: 0%;
+    background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-light));
+    transition: width 0.1s linear;
+  }
+
+  /* PARTÍCULAS */
+  #particles-canvas {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  }
+
+  /* WHATSAPP FLUTUANTE */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 150;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    animation: waPulse 2.5s infinite;
+    transition: transform 0.3s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+  }
+
+  /* PARCEIROS */
+  #parceiros {
+    background: var(--dark); border-top: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 4rem;
+  }
+  .parceiros-inner { max-width: 1200px; margin: 0 auto; }
+  .parceiros-tag { text-align: center; font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2.5rem; }
+  .parceiros-grid {
+    display: flex; align-items: center; justify-content: center;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .parceiro-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0.45; transition: opacity 0.3s;
+    cursor: default;
+  }
+  .parceiro-item:hover { opacity: 0.85; }
+  .parceiro-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; letter-spacing: 0.15em;
+    color: var(--gold-light); text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 0.6rem 1.4rem;
+  }
+  .parceiro-label { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
+
+  /* AGENDAMENTO */
+  #agendamento { background: var(--dark2); padding: 7rem 4rem; }
+  .agenda-inner { max-width: 900px; margin: 0 auto; }
+  .agenda-header { text-align: center; margin-bottom: 3.5rem; }
+  .agenda-header .divider { margin: 1.5rem auto 0; }
+  .agenda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .agenda-card {
+    background: var(--dark); border: 1px solid rgba(201,168,76,0.12);
+    padding: 2rem; display: flex; flex-direction: column; gap: 1rem;
+    transition: border-color 0.3s;
+  }
+  .agenda-card:hover { border-color: rgba(201,168,76,0.35); }
+  .agenda-day {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--cream); font-weight: 400;
+  }
+  .agenda-slots { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+  .slot {
+    font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text-muted);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 0.35rem 0.8rem; cursor: pointer; transition: all 0.2s;
+  }
+  .slot:hover, .slot.selected { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+  .slot.ocupado { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+  .slot.ocupado:hover { border-color: rgba(201,168,76,0.15); color: var(--text-muted); background: none; }
+  .agenda-cta {
+    text-align: center; margin-top: 2.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  }
+  .agenda-cta p { font-size: 0.78rem; color: var(--text-muted); }
+  .agenda-cta-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: var(--dark); padding: 0.9rem 2.2rem;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none; transition: opacity 0.3s;
+    opacity: 0.4; pointer-events: none;
+  }
+  .agenda-cta-btn.active { opacity: 1; pointer-events: all; }
+  .agenda-cta-btn.active:hover { opacity: 0.85; }
+
+  @media (max-width: 768px) {
+    #agendamento { padding: 5rem 1.5rem; }
+    .agenda-grid { grid-template-columns: 1fr; }
+    .parceiros-grid { gap: 1.5rem; }
+    #parceiros { padding: 3rem 1.5rem; }
+  }
+
   /* MODAL */
   .modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 200;
@@ -451,6 +569,12 @@
 </style>
 </head>
 <body>
+<div id="progress-bar"></div>
+
+<!-- WA FLUTUANTE -->
+<a href="https://wa.me/5511953538172?text=Ol%C3%A1%2C%20Dra.%20Jessica%21%20%F0%9F%8C%9F%0A%0AVim%20pelo%20seu%20site%20e%20fiquei%20encantada%20com%20o%20seu%20trabalho%21%0A%0AGostaria%20de%20saber%20mais%20sobre%20os%20procedimentos%20e%20como%20funciona%20a%20avalia%C3%A7%C3%A3o%20gratuita.%20%F0%9F%92%AB%0A%0APoderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%20sobre%20valores%20e%20disponibilidade%3F%0A%0AObrigada%21%20%F0%9F%99%8F" target="_blank" class="wa-float" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <nav>
   <div class="nav-logo">Dra. Jessica Toledo</div>
@@ -478,6 +602,7 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
+  <canvas id="particles-canvas"></canvas>
   <div class="hero-line"></div>
   <div class="hero-content reveal">
     <span class="hero-tag">Estética Avançada & Fisioterapia</span>
@@ -751,6 +876,97 @@
   </div>
 </section>
 
+
+<!-- AGENDAMENTO -->
+<section id="agendamento">
+  <div class="agenda-inner">
+    <div class="agenda-header reveal">
+      <p class="section-tag">Disponibilidade</p>
+      <h2 class="section-title">Agende sua <em>Consulta</em></h2>
+      <div class="divider" style="margin: 1.5rem auto 0;"></div>
+    </div>
+    <div class="agenda-grid reveal">
+      <div class="agenda-card">
+        <div class="agenda-day">Segunda-feira</div>
+        <div class="agenda-slots">
+          <div class="slot" onclick="selectSlot(this,'Seg 09:00')">09:00</div>
+          <div class="slot ocupado">10:00</div>
+          <div class="slot" onclick="selectSlot(this,'Seg 11:00')">11:00</div>
+          <div class="slot ocupado">14:00</div>
+          <div class="slot" onclick="selectSlot(this,'Seg 15:00')">15:00</div>
+          <div class="slot" onclick="selectSlot(this,'Seg 16:00')">16:00</div>
+        </div>
+      </div>
+      <div class="agenda-card">
+        <div class="agenda-day">Terça-feira</div>
+        <div class="agenda-slots">
+          <div class="slot ocupado">09:00</div>
+          <div class="slot" onclick="selectSlot(this,'Ter 10:00')">10:00</div>
+          <div class="slot" onclick="selectSlot(this,'Ter 11:00')">11:00</div>
+          <div class="slot" onclick="selectSlot(this,'Ter 14:00')">14:00</div>
+          <div class="slot ocupado">15:00</div>
+          <div class="slot" onclick="selectSlot(this,'Ter 16:00')">16:00</div>
+        </div>
+      </div>
+      <div class="agenda-card">
+        <div class="agenda-day">Quarta-feira</div>
+        <div class="agenda-slots">
+          <div class="slot" onclick="selectSlot(this,'Qua 09:00')">09:00</div>
+          <div class="slot" onclick="selectSlot(this,'Qua 10:00')">10:00</div>
+          <div class="slot ocupado">11:00</div>
+          <div class="slot ocupado">14:00</div>
+          <div class="slot" onclick="selectSlot(this,'Qua 15:00')">15:00</div>
+          <div class="slot" onclick="selectSlot(this,'Qua 17:00')">17:00</div>
+        </div>
+      </div>
+      <div class="agenda-card">
+        <div class="agenda-day">Quinta-feira</div>
+        <div class="agenda-slots">
+          <div class="slot ocupado">09:00</div>
+          <div class="slot ocupado">10:00</div>
+          <div class="slot" onclick="selectSlot(this,'Qui 11:00')">11:00</div>
+          <div class="slot" onclick="selectSlot(this,'Qui 14:00')">14:00</div>
+          <div class="slot" onclick="selectSlot(this,'Qui 15:00')">15:00</div>
+          <div class="slot ocupado">16:00</div>
+        </div>
+      </div>
+    </div>
+    <div class="agenda-cta">
+      <p id="agenda-info">Selecione um horário disponível para prosseguir</p>
+      <a href="#" id="agenda-btn" class="agenda-cta-btn" target="_blank">Confirmar pelo WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARCEIROS -->
+<section id="parceiros">
+  <div class="parceiros-inner reveal">
+    <p class="parceiros-tag">Marcas & Parceiros de confiança</p>
+    <div class="parceiros-grid">
+      <div class="parceiro-item">
+        <div class="parceiro-logo">Allergan</div>
+        <span class="parceiro-label">Toxina Botulínica</span>
+      </div>
+      <div class="parceiro-item">
+        <div class="parceiro-logo">Merz</div>
+        <span class="parceiro-label">Bioestimuladores</span>
+      </div>
+      <div class="parceiro-item">
+        <div class="parceiro-logo">Galderma</div>
+        <span class="parceiro-label">Preenchedores</span>
+      </div>
+      <div class="parceiro-item">
+        <div class="parceiro-logo">Teosyal</div>
+        <span class="parceiro-label">Ácido Hialurônico</span>
+      </div>
+      <div class="parceiro-item">
+        <div class="parceiro-logo">Dermapen</div>
+        <span class="parceiro-label">Microagulhamento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-logo">Dra. Jessica Toledo</div>
   <div class="footer-social">
@@ -879,6 +1095,114 @@ function closeModalDirect() {
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+
+// PROGRESS BAR
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const total = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (window.scrollY / total * 100) + '%';
+});
+
+// PARTÍCULAS DOURADAS
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = -Math.random() * 0.4 - 0.1;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.life = Math.random() * 200 + 100;
+    this.maxLife = this.life;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life--;
+    this.opacity = (this.life / this.maxLife) * 0.6;
+    if (this.life <= 0) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(201, 168, 76, ${this.opacity})`;
+    ctx.fill();
+  }
+}
+for (let i = 0; i < 60; i++) particles.push(new Particle());
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// PARALLAX HERO
+const heroContent = document.querySelector('.hero-content');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y < window.innerHeight) {
+    heroContent.style.transform = `translateY(${y * 0.25}px)`;
+    heroContent.style.opacity = 1 - (y / window.innerHeight) * 1.2;
+  }
+});
+
+// CONTADOR ANIMADO
+function animateCount(el, target, suffix) {
+  let start = 0;
+  const isK = target >= 1000;
+  const displayTarget = isK ? target / 1000 : target;
+  const duration = 1800;
+  const startTime = performance.now();
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * displayTarget);
+    el.textContent = (isK ? current + 'k' : current) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = (isK ? displayTarget + 'k' : displayTarget) + suffix;
+  }
+  requestAnimationFrame(update);
+}
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const statNums = document.querySelectorAll('.stat-num');
+      animateCount(statNums[0], 8, '+');
+      animateCount(statNums[1], 2000, '+');
+      animateCount(statNums[2], 98, '%');
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObserver.observe(statsEl);
+
+// AGENDAMENTO
+let selectedSlot = null;
+const WA_BASE = "https://wa.me/5511953538172?text=Ol%C3%A1%2C%20Dra.%20Jessica%21%20%F0%9F%8C%9F%0A%0AVim%20pelo%20seu%20site%20e%20fiquei%20encantada%20com%20o%20seu%20trabalho%21%0A%0AGostaria%20de%20saber%20mais%20sobre%20os%20procedimentos%20e%20como%20funciona%20a%20avalia%C3%A7%C3%A3o%20gratuita.%20%F0%9F%92%AB%0A%0APoderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%20sobre%20valores%20e%20disponibilidade%3F%0A%0AObrigada%21%20%F0%9F%99%8F";
+function selectSlot(el, label) {
+  document.querySelectorAll('.slot.selected').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedSlot = label;
+  document.getElementById('agenda-info').textContent = '✓ Horário selecionado: ' + label;
+  const msg = encodeURIComponent('Olá, Dra. Jessica! 🌟\n\nGostaria de agendar uma consulta para ' + label + '.\n\nAguardo confirmação! 🙏');
+  const btn = document.getElementById('agenda-btn');
+  btn.href = 'https://wa.me/5511953538172?text=' + msg;
+  btn.classList.add('active');
+}
 
 </script>
 
