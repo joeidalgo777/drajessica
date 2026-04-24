@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dra. Jessica Toledo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9A7A30;
+    --cream: #F7F3EE;
+    --dark: #0E0D0B;
+    --dark2: #1A1915;
+    --dark3: #242320;
+    --text-muted: #8A8780;
+    --text-light: #C8C5BF;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(14,13,11,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 300; letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem; font-weight: 400; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-muted);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--gold);
+    padding: 0.55rem 1.4rem; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--dark); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,168,76,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 30% at 20% 20%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  }
+  .hero-line {
+    position: absolute; top: 0; left: 50%;
+    width: 1px; height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    opacity: 0.5;
+  }
+  .hero-content { position: relative; max-width: 820px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+  }
+  .hero-tag::before, .hero-tag::after {
+    content: ''; display: inline-block; width: 30px; height: 1px;
+    background: var(--gold); vertical-align: middle; margin: 0 1rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--cream); margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle {
+    font-size: 0.9rem; font-weight: 300; color: var(--text-muted);
+    letter-spacing: 0.05em; line-height: 1.8; margin-bottom: 3rem;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: var(--dark); padding: 1rem 2.5rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .hero-cta:hover { opacity: 0.88; }
+  .hero-cta-arrow { font-size: 1rem; }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 4rem;
+    margin-top: 5rem; padding-top: 4rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--gold-light);
+    display: block; line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); margin-top: 0.4rem; display: block;
+  }
+
+  /* SECTION BASE */
+  section { padding: 7rem 4rem; }
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300; color: var(--cream); line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+  .divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 1.5rem 0 2rem;
+  }
+
+  /* SOBRE */
+  .sobre-img { position: relative; }
+  .sobre-img-placeholder {
+    aspect-ratio: 3/4; background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.8rem;
+  }
+  .sobre-img-placeholder svg { opacity: 0.25; }
+  .sobre-img-placeholder p { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
+  .sobre-img-corner {
+    position: absolute; bottom: -1rem; right: -1rem;
+    width: 80px; height: 80px;
+    border-right: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    opacity: 0.4;
+  }
+  .sobre-img-corner2 {
+    position: absolute; top: -1rem; left: -1rem;
+    width: 80px; height: 80px;
+    border-left: 1px solid var(--gold);
+    border-top: 1px solid var(--gold);
+    opacity: 0.4;
+  }
+  .sobre-text p {
+    font-size: 0.92rem; color: var(--text-muted); line-height: 1.9;
+    margin-bottom: 1.2rem; font-weight: 300;
+  }
+  .sobre-creds { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+  .cred-item {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.8rem; color: var(--text-light);
+  }
+  .cred-dot { width: 6px; height: 6px; background: var(--gold); flex-shrink: 0; }
+
+  /* PROCEDIMENTOS */
+  .proc-header { text-align: center; margin-bottom: 4rem; }
+  .proc-header .divider { margin: 1.5rem auto 0; }
+  .proc-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    background: rgba(201,168,76,0.1);
+  }
+  .proc-card {
+    background: var(--dark2); padding: 3rem 2.5rem;
+    transition: background 0.3s; cursor: default;
+  }
+  .proc-card:hover { background: var(--dark3); }
+  .proc-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(201,168,76,0.12); line-height: 1; margin-bottom: 1.5rem;
+  }
+  .proc-icon {
+    width: 40px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 1.5rem;
+  }
+  .proc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400; color: var(--cream); margin-bottom: 1rem;
+  }
+  .proc-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.85; font-weight: 300; }
+  .proc-more {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.5rem; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); cursor: pointer;
+  }
+
+  /* GALERIA */
+  .galeria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .galeria-card { position: relative; overflow: hidden; }
+  .galeria-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; aspect-ratio: 1; }
+  .galeria-img {
+    background: var(--dark3);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.4rem;
+  }
+  .galeria-img svg { opacity: 0.15; }
+  .galeria-img-label { font-size: 0.58rem; letter-spacing: 0.25em; color: var(--text-muted); text-transform: uppercase; }
+  .galeria-procedure { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-top: 0.8rem; }
+  .galeria-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+  /* DEPOIMENTOS */
+  .dep-header { text-align: center; margin-bottom: 4rem; }
+  .dep-header .divider { margin: 1.5rem auto 0; }
+  .dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.1); }
+  .dep-card { background: var(--dark); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .dep-stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.2em; }
+  .dep-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-style: italic; font-weight: 300;
+    color: var(--text-light); line-height: 1.7; flex: 1;
+  }
+  .dep-author {
+    display: flex; align-items: center; gap: 1rem;
+    padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.12);
+  }
+  .dep-avatar {
+    width: 38px; height: 38px;
+    background: var(--dark3); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--gold-light);
+  }
+  .dep-name { font-size: 0.82rem; font-weight: 500; color: var(--cream); }
+  .dep-proc { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid rgba(201,168,76,0.12); }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 0; text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--cream); font-weight: 400;
+  }
+  .faq-q:hover { color: var(--gold-light); }
+  .faq-icon {
+    width: 24px; height: 24px; flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; color: var(--gold); transition: transform 0.3s;
+  }
+  .faq-icon.open { transform: rotate(45deg); }
+  .faq-a {
+    display: none; padding: 0 0 1.5rem;
+    font-size: 0.85rem; color: var(--text-muted); line-height: 1.85; font-weight: 300;
+  }
+  .faq-a.open { display: block; }
+
+  /* CTA FINAL */
+  #contato { text-align: center; padding: 8rem 4rem; position: relative; overflow: hidden; }
+  .contato-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  }
+  .cta-buttons { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .cta-btn-primary {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: var(--dark); padding: 1rem 2.5rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.3s;
+  }
+  .cta-btn-primary:hover { opacity: 0.85; }
+  .cta-btn-secondary {
+    border: 1px solid rgba(201,168,76,0.4); color: var(--gold); padding: 1rem 2.5rem;
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;
+  }
+  .cta-btn-secondary:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); border-top: 1px solid rgba(201,168,76,0.12);
+    padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; font-weight: 300; letter-spacing: 0.3em;
+    color: var(--gold-light); text-transform: uppercase;
+  }
+  .footer-copy { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.1em; }
+  .footer-social { display: flex; gap: 1.2rem; }
+  .footer-social a {
+    font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-muted);
+    text-decoration: none; text-transform: uppercase; transition: color 0.3s;
+  }
+  .footer-social a:hover { color: var(--gold); }
+
+  /* SCROLL ANIM */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dra. Jessica Toledo</div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#procedimentos">Procedimentos</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://wa.me/SEUNUMERO" target="_blank" class="nav-cta">Agendar</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content reveal">
+    <span class="hero-tag">Estética Avançada & Fisioterapia</span>
+    <h1 class="hero-title">
+      Beleza com <em>Ciência</em><br>e Cuidado Profissional
+    </h1>
+    <p class="hero-subtitle">
+      Especialista em Microagulhamento, Toxina Botulínica e Recuperação Pós-Cirúrgica — resultados naturais que revelam a melhor versão de você.
+    </p>
+    <a href="https://wa.me/SEUNUMERO" target="_blank" class="hero-cta">
+      Agendar Avaliação Gratuita <span class="hero-cta-arrow">→</span>
+    </a>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Anos de experiência</span>
+      </div>
+      <div>
+        <span class="stat-num">2k+</span>
+        <span class="stat-label">Pacientes atendidas</span>
+      </div>
+      <div>
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Satisfação</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<div style="background: var(--dark2);">
+  <div id="sobre" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; padding: 7rem 4rem;">
+    <div class="sobre-img reveal">
+      <div class="sobre-img-corner2"></div>
+      <div class="sobre-img-placeholder">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="20" r="12" stroke="#C9A84C" stroke-width="1"/>
+          <path d="M10 55 Q30 40 50 55" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        </svg>
+        <p>Foto da Dra. Jessica</p>
+      </div>
+      <div class="sobre-img-corner"></div>
+    </div>
+    <div class="sobre-text reveal">
+      <p class="section-tag">Sobre Mim</p>
+      <h2 class="section-title">Fisioterapeuta &<br><em>Esteticista</em></h2>
+      <div class="divider"></div>
+      <p>Olá! Sou a Dra. Jessica Toledo, fisioterapeuta graduada e especialista em estética avançada. Minha jornada na área começou com a paixão em unir ciência e cuidado humano para transformar a autoestima das minhas pacientes.</p>
+      <p>Acredito que beleza é saúde — e que cada procedimento deve ser realizado com técnica apurada, materiais de alta qualidade e, acima de tudo, respeito à individualidade de cada pessoa.</p>
+      <div class="sobre-creds">
+        <div class="cred-item"><div class="cred-dot"></div> Fisioterapeuta — CREFITO</div>
+        <div class="cred-item"><div class="cred-dot"></div> Especialista em Dermatofuncional</div>
+        <div class="cred-item"><div class="cred-dot"></div> Certificada em Toxina Botulínica</div>
+        <div class="cred-item"><div class="cred-dot"></div> Pós-graduanda em Harmonização Orofacial</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCEDIMENTOS -->
+<section id="procedimentos">
+  <div class="proc-header reveal">
+    <p class="section-tag">O que oferecemos</p>
+    <h2 class="section-title">Procedimentos <em>Exclusivos</em></h2>
+    <div class="divider" style="margin: 1.5rem auto 0;"></div>
+  </div>
+  <div class="proc-grid reveal" style="max-width: 1200px; margin: 0 auto;">
+    <div class="proc-card">
+      <div class="proc-num">01</div>
+      <div class="proc-icon"></div>
+      <h3 class="proc-title">Microagulhamento</h3>
+      <p class="proc-desc">Estimulação natural de colágeno para tratar manchas, rugas e cicatrizes de acne. Pele renovada, uniforme e com brilho saudável após o tratamento.</p>
+      <span class="proc-more">Saiba mais →</span>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">02</div>
+      <div class="proc-icon"></div>
+      <h3 class="proc-title">Toxina Botulínica</h3>
+      <p class="proc-desc">Prevenção e suavização de linhas de expressão com foco absoluto em resultados naturais e harmônicos. Sua expressividade preservada com elegância.</p>
+      <span class="proc-more">Saiba mais →</span>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">03</div>
+      <div class="proc-icon"></div>
+      <h3 class="proc-title">Pós-Operatório</h3>
+      <p class="proc-desc">Fisioterapia especializada para acelerar a cicatrização e potencializar o resultado da sua cirurgia plástica com segurança e cuidado.</p>
+      <span class="proc-more">Saiba mais →</span>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">04</div>
+      <div class="proc-icon"></div>
+      <h3 class="proc-title">Harmonização Facial</h3>
+      <p class="proc-desc">Preenchimento com ácido hialurônico para realçar os ângulos do rosto, projetando lábios, queixo e maçãs do rosto de forma natural.</p>
+      <span class="proc-more">Saiba mais →</span>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">05</div>
+      <div class="proc-icon"></div>
+      <h3 class="proc-title">Drenagem Linfática</h3>
+      <p class="proc-desc">Técnica especializada pós-cirúrgica ou estética para redução de edemas, melhora do contorno corporal e aceleração da recuperação.</p>
+      <span class="proc-more">Saiba mais →</span>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">06</div>
+      <div class="proc-icon"></div>
+      <h3 class="proc-title">Skinbooster</h3>
+      <p class="proc-desc">Hidratação profunda da pele com micro injeções de ácido hialurônico para restaurar a luminosidade, firmeza e viço natural da pele.</p>
+      <span class="proc-more">Saiba mais →</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria" style="padding: 7rem 4rem; background: var(--dark2);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="reveal" style="margin-bottom: 3.5rem;">
+      <p class="section-tag">Resultados reais</p>
+      <h2 class="section-title">Antes & <em>Depois</em></h2>
+      <div class="divider"></div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 500px;">Cada resultado é único. As fotos abaixo são de pacientes reais com autorização concedida. Substitua pelas suas próprias fotos.</p>
+    </div>
+    <div class="galeria-grid reveal">
+      <div class="galeria-card">
+        <div class="galeria-pair">
+          <div class="galeria-img">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C9A84C" stroke-width="1"/><path d="M4 26 Q14 18 24 26" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+            <span class="galeria-img-label">Antes</span>
+          </div>
+          <div class="galeria-img">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C9A84C" stroke-width="1"/><path d="M4 26 Q14 18 24 26" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+            <span class="galeria-img-label">Depois</span>
+          </div>
+        </div>
+        <p class="galeria-procedure">Microagulhamento</p>
+        <p class="galeria-note">Manchas e poros — 3 sessões</p>
+      </div>
+      <div class="galeria-card">
+        <div class="galeria-pair">
+          <div class="galeria-img">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C9A84C" stroke-width="1"/><path d="M4 26 Q14 18 24 26" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+            <span class="galeria-img-label">Antes</span>
+          </div>
+          <div class="galeria-img">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C9A84C" stroke-width="1"/><path d="M4 26 Q14 18 24 26" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+            <span class="galeria-img-label">Depois</span>
+          </div>
+        </div>
+        <p class="galeria-procedure">Toxina Botulínica</p>
+        <p class="galeria-note">Linhas de expressão — resultado natural</p>
+      </div>
+      <div class="galeria-card">
+        <div class="galeria-pair">
+          <div class="galeria-img">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C9A84C" stroke-width="1"/><path d="M4 26 Q14 18 24 26" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+            <span class="galeria-img-label">Antes</span>
+          </div>
+          <div class="galeria-img">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C9A84C" stroke-width="1"/><path d="M4 26 Q14 18 24 26" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+            <span class="galeria-img-label">Depois</span>
+          </div>
+        </div>
+        <p class="galeria-procedure">Harmonização Facial</p>
+        <p class="galeria-note">Contorno e volume — lábios</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="dep-header reveal">
+    <p class="section-tag">O que dizem sobre mim</p>
+    <h2 class="section-title">Depoimentos das <em>Pacientes</em></h2>
+    <div class="divider" style="margin: 1.5rem auto 0;"></div>
+  </div>
+  <div class="dep-grid reveal" style="max-width: 1200px; margin: 0 auto;">
+    <div class="dep-card">
+      <div class="dep-stars">★ ★ ★ ★ ★</div>
+      <p class="dep-text">"A Dra. Jessica transformou minha autoestima. O microagulhamento foi incrível — minhas manchas sumiram e minha pele nunca esteve tão bonita."</p>
+      <div class="dep-author">
+        <div class="dep-avatar">AM</div>
+        <div>
+          <p class="dep-name">Ana Meireles</p>
+          <p class="dep-proc">Microagulhamento · 4 sessões</p>
+        </div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★ ★ ★ ★ ★</div>
+      <p class="dep-text">"Fiz o botox e fiquei apaixonada no resultado. Natural, delicado, sem aquela cara de congelada. Confio totalmente no trabalho dela."</p>
+      <div class="dep-author">
+        <div class="dep-avatar">CS</div>
+        <div>
+          <p class="dep-name">Carla Souza</p>
+          <p class="dep-proc">Toxina Botulínica</p>
+        </div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★ ★ ★ ★ ★</div>
+      <p class="dep-text">"Após minha abdominoplastia, a Jéssica foi fundamental na minha recuperação. A drenagem dela é outra coisa — profissional, atenciosa e eficiente."</p>
+      <div class="dep-author">
+        <div class="dep-avatar">RF</div>
+        <div>
+          <p class="dep-name">Roberta Ferreira</p>
+          <p class="dep-proc">Pós-operatório · Abdominoplastia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding: 7rem 4rem; background: var(--dark2);">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <div class="faq-header reveal">
+      <p class="section-tag">Dúvidas frequentes</p>
+      <h2 class="section-title">Perguntas <em>& Respostas</em></h2>
+      <div class="divider" style="margin: 1.5rem auto 0;"></div>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quantas sessões de microagulhamento são necessárias?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-a">O protocolo varia de acordo com a necessidade de cada paciente. Em geral, são recomendadas de 3 a 6 sessões com intervalo de 3 a 4 semanas entre cada uma. Na avaliação gratuita, determinamos juntas o melhor plano para o seu caso.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          O botox deixa a face "congelada"?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-a">Não! Quando aplicado corretamente, o botox preserva a expressividade facial e apenas suaviza as linhas de expressão. Minha abordagem prioriza sempre o resultado natural e harmonioso, respeitando a individualidade de cada rosto.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quando começo a drenagem pós-cirúrgica?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-a">Idealmente, a drenagem linfática pós-cirúrgica deve ser iniciada entre 24h e 48h após a cirurgia, mediante liberação do cirurgião responsável. Quanto antes iniciamos, melhores e mais rápidos são os resultados de recuperação.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Os procedimentos têm efeitos colaterais?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-a">Todos os procedimentos podem apresentar reações leves e temporárias, como vermelhidão, edema ou sensibilidade local. São passageiras e fazem parte do processo. Utilizo apenas produtos e equipamentos certificados, e todo protocolo é adaptado ao seu perfil de saúde.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Você atende em consultório ou domicílio?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-a">Atendo em consultório próprio com estrutura completa. Para pacientes em pós-operatório que estejam com mobilidade reduzida, também ofereço atendimento domiciliar mediante agendamento prévio. Entre em contato para verificar disponibilidade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contato">
+  <div class="contato-bg"></div>
+  <div style="position: relative; max-width: 700px; margin: 0 auto;" class="reveal">
+    <span class="section-tag" style="display: block; margin-bottom: 1rem;">Pronta para começar?</span>
+    <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1.2rem;">Agende sua <em>Avaliação</em><br>Gratuita</h2>
+    <div class="divider" style="margin: 1.5rem auto 2rem;"></div>
+    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 3rem; font-weight: 300;">Dê o primeiro passo para se sentir ainda mais linda e confiante. A avaliação é sem compromisso — vamos conversar sobre seus objetivos e criar um plano personalizado para você.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/SEUNUMERO" target="_blank" class="cta-btn-primary">WhatsApp → Agendar</a>
+      <a href="https://instagram.com/SEUINSTAGRAM" target="_blank" class="cta-btn-secondary">Ver Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Dra. Jessica Toledo</div>
+  <div class="footer-social">
+    <a href="#">Instagram</a>
+    <a href="#">WhatsApp</a>
+  </div>
+  <p class="footer-copy">© 2026 Dra. Jessica Toledo · Fisioterapeuta & Esteticista</p>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const icon = btn.querySelector('.faq-icon');
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-icon.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) {
+    answer.classList.add('open');
+    icon.classList.add('open');
+  }
+}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
