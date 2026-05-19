@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contrato · Dra. Jessica Toledo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9A7A30;
+    --cream: #F7F3EE;
+    --dark: #0E0D0B;
+    --dark2: #1A1915;
+    --dark3: #242320;
+    --text-muted: #8A8780;
+    --text-light: #C8C5BF;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── LOCK SCREEN ──────────────────────────────────────────────────── */
+  #lock {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--dark);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0;
+  }
+  #lock.fade-out { animation: fadeOut .45s ease forwards; }
+  @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+
+  .lock-ornament {
+    width: 1px; height: 70px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    opacity: .5; margin-bottom: 2.5rem;
+  }
+  .lock-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 300;
+    letter-spacing: .35em; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: .4rem;
+  }
+  .lock-sub {
+    font-size: .62rem; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 3rem;
+  }
+  .lock-box {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    width: 280px;
+  }
+  .lock-label {
+    font-size: .62rem; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .lock-input {
+    width: 100%; padding: 12px 18px;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,.35);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: .95rem;
+    letter-spacing: .15em; text-align: center;
+    outline: none; transition: border-color .25s;
+  }
+  .lock-input:focus { border-color: var(--gold); }
+  .lock-input::placeholder { color: #3a3830; letter-spacing: .08em; }
+  .lock-btn {
+    width: 100%; padding: 12px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    border: none; color: var(--dark);
+    font-family: 'DM Sans', sans-serif; font-size: .7rem;
+    font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    cursor: pointer; transition: opacity .25s;
+  }
+  .lock-btn:hover { opacity: .85; }
+  .lock-error {
+    font-size: .72rem; color: #c97070;
+    letter-spacing: .08em; min-height: 1em; text-align: center;
+  }
+  .lock-hint {
+    margin-top: 2.5rem;
+    font-size: .58rem; letter-spacing: .22em; text-transform: uppercase;
+    color: #2e2c28;
+  }
+
+  /* ── APP ──────────────────────────────────────────────────────────── */
+  #app { display: none; }
+  #app.visible { display: block; }
+
+  /* ── PROGRESS BAR ─────────────────────────────────────────────────── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 999;
+    height: 2px; width: 0%;
+    background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-light));
+    transition: width .1s linear;
+  }
+
+  /* ── NAV ──────────────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(14,13,11,.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 300; letter-spacing: .3em;
+    color: var(--gold-light); text-transform: uppercase;
+  }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-badge {
+    font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,.3);
+    padding: .3rem .8rem;
+  }
+  .nav-back {
+    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; transition: color .25s;
+  }
+  .nav-back:hover { color: var(--gold); }
+
+  /* ── PAGE HEADER ─────────────────────────────────────────────────── */
+  .page-header {
+    min-height: 38vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    padding: 9rem 4rem 4rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .page-header-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 110%, rgba(201,168,76,.09) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 30% at 20% 20%, rgba(201,168,76,.04) 0%, transparent 60%);
+  }
+  .header-line {
+    position: absolute; top: 0; left: 50%;
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    opacity: .4;
+  }
+  .header-tag {
+    font-size: .62rem; letter-spacing: .35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem; position: relative;
+  }
+  .header-tag::before, .header-tag::after {
+    content: ''; display: inline-block; width: 24px; height: 1px;
+    background: var(--gold); vertical-align: middle; margin: 0 .8rem;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--cream); position: relative;
+  }
+  .header-title em { font-style: italic; color: var(--gold-light); }
+  .header-divider {
+    width: 50px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 1.5rem auto 0;
+  }
+
+  /* ── CONTAINER ────────────────────────────────────────────────────── */
+  .container {
+    max-width: 900px; margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ── CARD ─────────────────────────────────────────────────────────── */
+  .card {
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,.12);
+    padding: 2.8rem 3rem; margin-bottom: 1.5rem;
+    transition: border-color .3s;
+  }
+  .card:hover { border-color: rgba(201,168,76,.25); }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 400; color: var(--cream);
+    display: flex; align-items: center; gap: .9rem;
+    margin-bottom: 1.8rem; padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(201,168,76,.12);
+  }
+  .card-num {
+    font-size: .7rem; letter-spacing: .12em; color: var(--gold);
+    border: 1px solid rgba(201,168,76,.3);
+    padding: .25rem .65rem; font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+  }
+
+  /* ── FORM ─────────────────────────────────────────────────────────── */
+  .fg { display: grid; gap: 1.2rem; }
+  .fg-2 { grid-template-columns: 1fr 1fr; }
+  .fg-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .fg-12 { grid-template-columns: 1fr 2fr; }
+  .fg + .fg { margin-top: 1.2rem; }
+
+  .field { display: flex; flex-direction: column; gap: .5rem; }
+  .field label {
+    font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 400;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    padding: .75rem 1rem;
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,.15);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: .88rem;
+    outline: none; transition: border-color .2s, background .2s;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,.03);
+  }
+  .field select option { background: var(--dark3); color: var(--cream); }
+  .field input::placeholder,
+  .field textarea::placeholder { color: #3a3830; }
+  .field textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
+
+  /* static / read-only field */
+  .field-static { display: flex; flex-direction: column; gap: .5rem; }
+  .field-static label {
+    font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .field-static .val {
+    padding: .75rem 1rem;
+    border: 1px solid rgba(201,168,76,.08);
+    color: var(--text-muted); font-size: .88rem;
+    background: rgba(255,255,255,.02);
+  }
+
+  /* ── CLAUSE TEXT ────────────────────────────────────────────────────── */
+  .clause {
+    font-size: .84rem; font-weight: 300;
+    color: var(--text-muted); line-height: 1.85;
+    margin-bottom: .9rem; text-align: justify;
+  }
+  .clause b { color: var(--text-light); font-weight: 500; }
+  .clause.hl {
+    border-left: 2px solid var(--gold);
+    padding-left: 1rem;
+    color: var(--text-light); font-weight: 400;
+  }
+
+  .dot-list { list-style: none; padding: 0; margin: .6rem 0 .8rem; }
+  .dot-list li {
+    font-size: .84rem; font-weight: 300; color: var(--text-muted);
+    line-height: 1.7; padding: .25rem 0 .25rem 1.4rem; position: relative;
+  }
+  .dot-list li::before {
+    content: '';
+    position: absolute; left: 0; top: .65rem;
+    width: 5px; height: 5px; background: var(--gold);
+  }
+
+  /* ── VALIDITY TABLE ─────────────────────────────────────────────────── */
+  .vtable {
+    width: 100%; border-collapse: collapse;
+    margin: 1rem 0; font-size: .84rem;
+  }
+  .vtable th {
+    background: var(--dark3);
+    color: var(--gold); font-weight: 500;
+    letter-spacing: .08em; text-transform: uppercase; font-size: .7rem;
+    padding: .75rem 1.2rem; text-align: left;
+    border-bottom: 1px solid rgba(201,168,76,.2);
+  }
+  .vtable td {
+    padding: .7rem 1.2rem;
+    border-bottom: 1px solid rgba(201,168,76,.07);
+    color: var(--text-muted); font-weight: 300;
+  }
+  .vtable tr:last-child td { border-bottom: none; }
+  .vtable tr:nth-child(even) td { background: rgba(201,168,76,.03); }
+
+  /* ── SIGNATURES ─────────────────────────────────────────────────────── */
+  .date-row {
+    display: flex; align-items: center; gap: .8rem;
+    font-size: .85rem; color: var(--text-muted);
+    margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .date-row input {
+    padding: .55rem .9rem;
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,.2);
+    color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: .85rem;
+    outline: none; transition: border-color .2s;
+  }
+  .date-row input:focus { border-color: var(--gold); }
+
+  .sig-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    margin-top: 1.5rem;
+  }
+  .sig-block {
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201,168,76,.35);
+    text-align: center;
+  }
+  .sig-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400; color: var(--cream);
+    letter-spacing: .04em; margin-bottom: .3rem;
+    min-height: 1.4em;
+  }
+  .sig-role {
+    font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── ACTIONS ─────────────────────────────────────────────────────────── */
+  .actions {
+    display: flex; justify-content: center; gap: 1rem;
+    margin-top: 2.5rem; flex-wrap: wrap;
+  }
+  .btn-print {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: var(--dark); padding: 1rem 2.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: opacity .25s;
+  }
+  .btn-print:hover { opacity: .85; }
+  .btn-reset {
+    display: inline-flex; align-items: center; gap: .6rem;
+    border: 1px solid rgba(201,168,76,.3); color: var(--gold);
+    padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    background: transparent; cursor: pointer; transition: all .25s;
+  }
+  .btn-reset:hover { border-color: var(--gold); background: rgba(201,168,76,.04); }
+
+  /* ── PRINT ───────────────────────────────────────────────────────────── */
+  @media print {
+    #lock, #progress-bar, nav, .actions { display: none !important; }
+    body { background: #fff; color: #111; }
+    .page-header {
+      background: #fff !important; padding: 1.5rem 2rem !important;
+      min-height: auto !important;
+    }
+    .page-header-bg, .header-line { display: none; }
+    .header-title { color: #111 !important; font-size: 1.8rem !important; }
+    .header-title em { color: #9A7A30 !important; }
+    .header-tag { color: #9A7A30 !important; }
+    .container { padding: 1.5rem 2rem 3rem; max-width: 100%; }
+    .card {
+      background: #fff; border: 1px solid #ddd;
+      break-inside: avoid; margin-bottom: 1rem;
+      padding: 1.2rem 1.5rem;
+    }
+    .card-title { color: #111; font-size: 1rem; border-color: #ddd; }
+    .card-num { color: #9A7A30; border-color: #ccc; }
+    .field input, .field select, .field textarea, .date-row input {
+      background: transparent; border: none;
+      border-bottom: 1px solid #bbb; color: #111; padding: 2px 0;
+    }
+    .field-static .val { background: transparent; color: #555; border-color: #eee; }
+    .field label, .field-static label { color: #888; }
+    .clause { color: #444; }
+    .clause.hl { border-color: #9A7A30; color: #333; }
+    .dot-list li { color: #444; }
+    .vtable th { background: #f5f0e8; color: #9A7A30; }
+    .vtable td { color: #444; }
+    .sig-block { border-color: #888; }
+    .sig-name { color: #111; }
+    .sig-role { color: #888; }
+    .date-row { color: #444; }
+    .header-divider { background: #9A7A30; }
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-badge { display: none; }
+    .page-header { padding: 7rem 1.5rem 3rem; }
+    .container { padding: 2.5rem 1rem 4rem; }
+    .card { padding: 1.8rem 1.5rem; }
+    .fg-2, .fg-3, .fg-12 { grid-template-columns: 1fr; }
+    .sig-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ LOCK ═══════════════════════════════════════ -->
+<div id="lock">
+  <div class="lock-ornament"></div>
+  <div class="lock-logo">Dra. Jessica Toledo</div>
+  <div class="lock-sub">Área administrativa · Acesso restrito</div>
+  <div class="lock-box">
+    <span class="lock-label">Senha da clínica</span>
+    <input id="pwd" class="lock-input" type="password" placeholder="••••••••" autocomplete="off" />
+    <button class="lock-btn" onclick="unlock()">Entrar →</button>
+    <div id="lock-err" class="lock-error"></div>
+  </div>
+  <div class="lock-hint">Uso exclusivo da equipe · Dra. Jéssica Toledo Amaral</div>
+</div>
+
+<!-- ═══════════════════════ APP ════════════════════════════════════════ -->
+<div id="app">
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Dra. Jessica Toledo</div>
+    <div class="nav-right">
+      <span class="nav-badge">Área Administrativa</span>
+      <a href="index.html" class="nav-back">← Voltar ao site</a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="page-header-bg"></div>
+    <div class="header-line"></div>
+    <span class="header-tag">Uso interno</span>
+    <h1 class="header-title">Contrato de <em>Prestação</em><br>de Serviços Estéticos</h1>
+    <div class="header-divider"></div>
+  </div>
+
+  <!-- FORM -->
+  <div class="container">
+  <form id="form" onsubmit="return false;">
+
+    <!-- 1 · CONTRATANTE -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">I</span> Dados da Contratante</div>
+      <div class="fg">
+        <div class="field">
+          <label>Nome completo</label>
+          <input id="nome" type="text" placeholder="Nome completo da paciente" />
+        </div>
+      </div>
+      <div class="fg fg-2" style="margin-top:1.2rem">
+        <div class="field">
+          <label>Nacionalidade</label>
+          <input id="nacionalidade" type="text" placeholder="Brasileira" />
+        </div>
+        <div class="field">
+          <label>Estado Civil</label>
+          <select id="estado_civil">
+            <option value="">Selecione...</option>
+            <option>Solteira</option><option>Casada</option>
+            <option>Divorciada</option><option>Viúva</option>
+            <option>União estável</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg fg-3" style="margin-top:1.2rem">
+        <div class="field">
+          <label>CPF</label>
+          <input id="cpf" type="text" placeholder="000.000.000-00" maxlength="14" />
+        </div>
+        <div class="field">
+          <label>RG</label>
+          <input id="rg" type="text" placeholder="00.000.000-0" />
+        </div>
+        <div class="field">
+          <label>Data de nascimento</label>
+          <input id="nasc" type="date" />
+        </div>
+      </div>
+      <div class="fg fg-12" style="margin-top:1.2rem">
+        <div class="field">
+          <label>CEP</label>
+          <input id="cep" type="text" placeholder="00000-000" maxlength="9" />
+        </div>
+        <div class="field">
+          <label>Endereço completo</label>
+          <input id="endereco" type="text" placeholder="Rua, número, complemento" />
+        </div>
+      </div>
+      <div class="fg fg-3" style="margin-top:1.2rem">
+        <div class="field">
+          <label>Bairro</label>
+          <input id="bairro" type="text" placeholder="Bairro" />
+        </div>
+        <div class="field">
+          <label>Cidade / Estado</label>
+          <input id="cidade" type="text" placeholder="Mogi das Cruzes – SP" />
+        </div>
+        <div class="field">
+          <label>Profissão</label>
+          <input id="profissao" type="text" placeholder="Profissão" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · CONTRATADA -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">II</span> Dados da Contratada</div>
+      <div class="fg fg-2">
+        <div class="field-static"><label>Nome</label><div class="val">Jéssica Toledo Amaral</div></div>
+        <div class="field">
+          <label>CNPJ</label>
+          <input id="cnpj" type="text" placeholder="00.000.000/0001-00" maxlength="18" />
+        </div>
+      </div>
+      <div class="fg fg-2" style="margin-top:1.2rem">
+        <div class="field-static"><label>Endereço</label><div class="val">Av. Narcizo Yague Guimarães, 1145, Sala 403</div></div>
+        <div class="field-static"><label>Bairro / Cidade / CEP</label><div class="val">Jardim Armênia – Mogi das Cruzes – SP &nbsp;|&nbsp; CEP 08780-000</div></div>
+      </div>
+      <div style="margin-top:1.2rem">
+        <p class="clause"><b>Parágrafo Único:</b> A CONTRATADA compromete-se a disponibilizar profissionais capacitados e habilitados para suas respectivas funções durante todo o processo de tratamento.</p>
+      </div>
+    </div>
+
+    <!-- 3 · OBJETO -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">III</span> Objeto da Contratação &amp; Condições dos Serviços</div>
+      <p class="clause" style="margin-bottom:1rem">Descreva os procedimentos a serem realizados, quantidade de sessões e intervalo entre elas:</p>
+      <div class="field">
+        <label>Procedimento(s) contratado(s)</label>
+        <textarea id="procedimentos" placeholder="Ex.: Microagulhamento facial — 6 sessões, intervalo de 21 dias entre cada sessão."></textarea>
+      </div>
+      <div style="margin-top:1.5rem">
+        <p class="clause"><b>a) Do Local:</b> Todos os serviços serão prestados nas dependências da Dra. Jéssica Toledo Amaral – Fisioterapia Dermatofuncional.</p>
+        <p class="clause"><b>b) Do Horário:</b> A CONTRATADA disponibilizará horários variados, sem compromisso de atendimento fora dos horários estipulados pela clínica.</p>
+        <p class="clause"><b>c) Dos Profissionais:</b> Profissionais habilitados serão disponibilizados de acordo com os padrões técnicos exigidos.</p>
+      </div>
+    </div>
+
+    <!-- 4 · VALOR -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">IV</span> Valor dos Serviços &amp; Forma de Pagamento</div>
+      <div class="fg fg-2">
+        <div class="field">
+          <label>Valor total (R$)</label>
+          <input id="valor" type="text" placeholder="R$ 0.000,00" />
+        </div>
+        <div class="field">
+          <label>Parcelamento (se houver)</label>
+          <input id="parcelas" type="text" placeholder="Ex.: 3× de R$ 500,00" />
+        </div>
+      </div>
+      <div style="margin-top:1.4rem">
+        <p class="clause"><b>Formas de pagamento aceitas:</b></p>
+        <ul class="dot-list">
+          <li>Dinheiro, cartão de débito ou crédito, transferência bancária, PIX ou boleto bancário.</li>
+          <li>Os pagamentos são devidos independentemente da frequência ao estabelecimento.</li>
+          <li>A quitação ocorre apenas após a confirmação do crédito total em favor da CONTRATADA.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5 · FALTAS -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">V</span> Das Faltas</div>
+      <p class="clause"><b>a)</b> É de responsabilidade exclusiva da CONTRATANTE respeitar e cumprir a agenda previamente organizada.</p>
+      <p class="clause hl"><b>b)</b> A CONTRATANTE terá direito a repor as sessões agendadas dentro do prazo do contrato, mediante <b>aviso prévio de no mínimo 12 horas</b> de antecedência. Caso falte sem aviso prévio, a sessão será considerada como realizada.</p>
+    </div>
+
+    <!-- 6 · PRAZOS -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">VI</span> Prazos de Validade</div>
+      <p class="clause">A duração do contrato varia conforme o tratamento definido na avaliação inicial:</p>
+      <table class="vtable">
+        <thead><tr><th>Sessões contratadas</th><th>Prazo de utilização</th></tr></thead>
+        <tbody>
+          <tr><td>03 sessões</td><td>60 dias corridos</td></tr>
+          <tr><td>04 a 10 sessões</td><td>4 meses (120 dias corridos)</td></tr>
+          <tr><td>15 sessões</td><td>6 meses (180 dias corridos)</td></tr>
+        </tbody>
+      </table>
+      <p class="clause" style="margin-top:.8rem">O intervalo mínimo entre sessões deve ser respeitado conforme estipulado no objeto de contratação, não sendo permitidas duas sessões consecutivas em curto espaço de tempo.</p>
+    </div>
+
+    <!-- 7 · CANCELAMENTO & RESCISÃO -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">VII</span> Cancelamento &amp; Rescisão</div>
+      <p class="clause"><b>a)</b> Será caracterizado abandono quando a CONTRATANTE faltar a três sessões consecutivas, ou se ausentar por mais de 45 dias sem justificativa. O contrato será considerado rescindido por iniciativa da CONTRATANTE.</p>
+      <p class="clause"><b>b)</b> O abandono poderá acarretar a necessidade de reinicialização do processo terapêutico, sob novo orçamento.</p>
+      <p class="clause"><b>c)</b> O contrato poderá ser rescindido a qualquer tempo, mediante solicitação por escrito com antecedência mínima de <b>10 dias</b> da próxima parcela. Em caso de cancelamento antecipado, será devido à CONTRATADA o equivalente a <b>30%</b> do valor das sessões não executadas.</p>
+      <p class="clause"><b>d)</b> Caso a CONTRATADA fique permanentemente impossibilitada de prestar os serviços, a CONTRATANTE será reembolsada em <b>100%</b> do valor dos procedimentos não realizados.</p>
+    </div>
+
+    <!-- 8 · DISPOSIÇÕES GERAIS -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">VIII</span> Disposições Gerais</div>
+      <p class="clause"><b>a)</b> O presente contrato é firmado por prazo determinado, podendo ser renovado mediante as condições vigentes à época.</p>
+      <p class="clause"><b>b)</b> Fica expressamente autorizada a realização de fotografias para fins documentais (prontuário) e comparativos antes/depois, para demonstração de resultados à CONTRATANTE.</p>
+      <p class="clause"><b>c)</b> As partes elegem o Foro da Comarca de <b>Mogi das Cruzes – SP</b> como o único competente para dirimir as dúvidas decorrentes deste instrumento, assinando o presente em duas vias de igual teor.</p>
+    </div>
+
+    <!-- 9 · ASSINATURAS -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">IX</span> Assinaturas</div>
+      <div class="date-row">
+        <span>Mogi das Cruzes – SP,&nbsp;</span>
+        <input id="data_assinatura" type="date" />
+      </div>
+      <div class="sig-grid">
+        <div class="sig-block">
+          <div class="sig-name" id="sig-nome">________________________________</div>
+          <div class="sig-role">Contratante · Assinatura</div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-name">Jéssica Toledo Amaral</div>
+          <div class="sig-role">Contratada · Assinatura / Carimbo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button type="button" class="btn-print" onclick="handlePrint()">🖨 Imprimir / Salvar PDF</button>
+      <button type="button" class="btn-reset" onclick="handleReset()">↺ Limpar campos</button>
+    </div>
+
+  </form>
+  </div><!-- /container -->
+</div><!-- /app -->
+
+<script>
+  const SENHA = 'jessica2026'; // ← altere aqui
+
+  // ── UNLOCK ──────────────────────────────────────────────────────────
+  function unlock() {
+    const v = document.getElementById('pwd').value;
+    const err = document.getElementById('lock-err');
+    if (v === SENHA) {
+      const lock = document.getElementById('lock');
+      lock.classList.add('fade-out');
+      setTimeout(() => {
+        lock.style.display = 'none';
+        document.getElementById('app').classList.add('visible');
+        document.getElementById('data_assinatura').value =
+          new Date().toISOString().split('T')[0];
+      }, 450);
+    } else {
+      err.textContent = 'Senha incorreta. Tente novamente.';
+      document.getElementById('pwd').value = '';
+      document.getElementById('pwd').focus();
+      setTimeout(() => err.textContent = '', 2800);
+    }
+  }
+  document.getElementById('pwd').addEventListener('keydown', e => {
+    if (e.key === 'Enter') unlock();
+  });
+
+  // ── MASKS ────────────────────────────────────────────────────────────
+  document.getElementById('cpf').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,11);
+    if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+    else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+    else if (v.length > 3) v = v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+    this.value = v;
+  });
+  document.getElementById('cep').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,8);
+    if (v.length > 5) v = v.replace(/(\d{5})(\d{1,3})/,'$1-$2');
+    this.value = v;
+  });
+  document.getElementById('cnpj').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,14);
+    if (v.length > 12) v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})/,'$1.$2.$3/$4-$5');
+    else if (v.length > 8) v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{1,4})/,'$1.$2.$3/$4');
+    else if (v.length > 5) v = v.replace(/(\d{2})(\d{3})(\d{1,3})/,'$1.$2.$3');
+    else if (v.length > 2) v = v.replace(/(\d{2})(\d{1,3})/,'$1.$2');
+    this.value = v;
+  });
+
+  // ── PROGRESS BAR ────────────────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress-bar').style.width =
+      (window.scrollY / total * 100) + '%';
+  });
+
+  // ── PRINT ────────────────────────────────────────────────────────────
+  function handlePrint() {
+    const nome = document.getElementById('nome').value.trim();
+    document.getElementById('sig-nome').textContent =
+      nome || '________________________________';
+    window.print();
+  }
+
+  // ── RESET ────────────────────────────────────────────────────────────
+  function handleReset() {
+    if (!confirm('Limpar todos os campos?')) return;
+    document.getElementById('form').reset();
+    document.getElementById('data_assinatura').value =
+      new Date().toISOString().split('T')[0];
+    document.getElementById('sig-nome').textContent = '________________________________';
+  }
+</script>
+</body>
+</html>
