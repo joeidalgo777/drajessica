@@ -45,15 +45,23 @@
     /* ── APP LAYOUT ───────────────────────────────────────────────────── */
     .progress-bar { position: fixed; top: 0; left: 0; z-index: 999; height: 2px; width: 0; background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-light)); transition: width .1s linear; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 3.5rem; background: rgba(28,8,8,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    
+    .nav-logo-wrap { display: flex; align-items: center; gap: 1rem; }
+    .nav-logo-img { height: 36px; width: auto; }
+    .nav-logo-text { font-size: 1rem; font-weight: 300; letter-spacing: .28em; color: var(--gold-light); text-transform: uppercase; display: none; }
+    
     .nav-right { display: flex; align-items: center; gap: 1.2rem; }
     .nav-badge { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(201,146,74,.3); padding:.28rem .75rem }
     .nav-back { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-decoration:none }
+    
     .page-header { min-height:42vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding:9rem 4rem 4.5rem; text-align:center; position:relative; overflow:hidden }
-    .header-logo-text { font-size:1.4rem; font-weight:300; letter-spacing:.28em; color:var(--gold-light); text-transform:uppercase; margin-bottom:1.5rem }
+    .header-logo { height: 80px; width: auto; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+    .header-logo-text { font-size:1.4rem; font-weight:300; letter-spacing:.28em; color:var(--gold-light); text-transform:uppercase; margin-bottom:1.5rem; position:relative; z-index:1; display:none; }
     .header-tag { font-size:.6rem; letter-spacing:.38em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem }
     .header-title { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:300; line-height:1.1; color:var(--cream)}
     .header-title em { font-style:italic; color:var(--gold-light) }
     .header-divider { width:48px; height:1px; background:linear-gradient(to right,var(--gold),transparent); margin:1.4rem auto 0 }
+    
     .container { max-width:900px; margin:0 auto; padding:3.5rem 2rem 6rem }
     .card { background:var(--wine2); border:1px solid var(--border); padding:2.6rem 2.8rem; margin-bottom:1.4rem; transition:border-color .3s }
     .card-title { font-size:1.3rem; font-weight:400; color:var(--cream); display:flex; align-items:center; gap:.85rem; margin-bottom:1.7rem; padding-bottom:1.1rem; border-bottom:1px solid var(--border)}
@@ -82,7 +90,7 @@
     .sig-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:1.4rem }
     .sig-block { padding-top:2.4rem; border-top:1px solid rgba(201,146,74,.32); text-align:center }
     .sig-name { font-size:1rem; font-weight:400; color:var(--cream); letter-spacing:.04em; margin-bottom:.28rem; min-height:1.4em }
-    .sig-role { font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted) }
+    .sig-role { font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted)}
     .date-row { display:flex; align-items:center; gap:.7rem; font-size:.84rem; color:var(--muted); margin-bottom:2.4rem; font-weight:300 }
     .date-row input { padding:.5rem .85rem; background:var(--wine3); border:1px solid rgba(201,146,74,.2); color:var(--cream); font-size:.84rem }
     .actions { display:flex; justify-content:center; gap:1rem; margin-top:2.4rem; flex-wrap:wrap }
@@ -91,24 +99,220 @@
     .btn-reset { border:1px solid rgba(201,146,74,.3); color:var(--gold); background:transparent; padding:1rem 2rem }
     
     /* ── PRINT MEDIA ──────────────────────────────────────────────────── */
+    @page {
+      size: A4;
+      margin: 8mm 10mm;
+    }
+
     @media print {
-      #lock, nav, .actions, .progress-bar { display:none !important } 
-      body { background:#fff; color:#111; font-size:8.5pt; line-height:1.35; padding:13mm 17mm } 
-      .page-header { background:#fff !important; min-height:auto !important; padding:0 0 .7rem !important; border-bottom:2px solid #5c2a0a; margin-bottom:.7rem; text-align:center } 
-      .container { padding:0; max-width:100%; margin:0 } 
-      .card { background:transparent; border:none; padding:0; margin-bottom:.65rem; break-inside:auto } 
-      .card-title,.header-title,.clause,.sig-name,.sig-role,.date-row,.vtable td,.vtable th { color:#111 !important } 
-      .card-title { font-size:.92rem; font-weight:700; border-bottom:1px solid #5c2a0a; padding-bottom:.18rem; margin-bottom:.45rem } 
-      .card-num { color:#5c2a0a; border-color:#5c2a0a; font-weight:700 } 
-      .clause { font-size:.8rem; margin-bottom:.3rem; line-height:1.32 } 
-      .clause.hl { border-left:2px solid #5c2a0a; padding-left:.5rem; background:transparent } 
-      .clause.info { border-left:2px solid #bbb; background:transparent; font-size:.75rem } 
-      .vtable th { background:#f2ece6; color:#5c2a0a; font-weight:700; border-bottom:1px solid #5c2a0a; padding:.25rem .45rem } 
-      .vtable td { border-bottom:1px solid #ddd; padding:.25rem .45rem } 
-      .sig-grid { gap:2rem; margin-top:1rem; break-inside:avoid } 
-      .sig-block { border-top:1px solid #333; padding-top:1.1rem } 
-      .sig-name { font-size:.92rem } 
-      .sig-role { color:#555 }
+      html, body {
+        background: #fff !important;
+        color: #111 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.4pt;
+        line-height: 1.16;
+      }
+
+      * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      #lock, nav, .actions, .progress-bar, .nav-back, .nav-badge, .lock-hint {
+        display: none !important;
+      }
+
+      .page-header {
+        min-height: auto !important;
+        padding: 0 0 2.5mm !important;
+        margin-bottom: 2mm;
+        border-bottom: 1px solid #ddd3ca;
+        text-align: center;
+        background: #fff !important;
+      }
+
+      .header-logo {
+        height: 48px;
+        margin: 0 auto 1.5mm;
+        display: block;
+      }
+
+      .header-logo-text {
+        font-size: 11pt !important;
+        color: #111 !important;
+      }
+
+      .header-tag {
+        display: none !important;
+      }
+
+      .header-title {
+        font-size: 15pt !important;
+        font-weight: 300;
+        line-height: 1.02;
+        color: #111 !important;
+      }
+
+      .header-title em {
+        color: #6b574a !important;
+        font-style: italic;
+      }
+
+      .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .card {
+        background: transparent !important;
+        border: 0 !important;
+        padding: 0 !important;
+        margin-bottom: 1.8mm;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .card-title {
+        font-size: 9.2pt;
+        font-weight: 600;
+        color: #111 !important;
+        border-bottom: 1px solid #e6ddd5;
+        padding-bottom: 1.1mm;
+        margin-bottom: 1.3mm;
+        letter-spacing: .015em;
+      }
+
+      .card-num {
+        color: #6b574a !important;
+        border-color: #d9cdc3 !important;
+      }
+
+      .fg, .fg-2, .fg-3, .fg-12 {
+        gap: 1.8mm !important;
+      }
+
+      .field label, .field-static label {
+        font-size: 6.3pt !important;
+        letter-spacing: .12em;
+        color: #8c837b !important;
+        margin-bottom: .7mm;
+      }
+
+      .field input, .field select, .field textarea, .date-row input, .field-static .val {
+        background: #fff !important;
+        border: 1px solid #e7e1da !important;
+        color: #111 !important;
+        padding: 1.8mm 2.2mm !important;
+        font-size: 7.8pt !important;
+        min-height: auto !important;
+        border-radius: 2px;
+      }
+
+      .clause, .field-static .val, .vtable td, .vtable th, .sig-name, .sig-role, .date-row {
+        color: #111 !important;
+        font-size: 7.8pt;
+        line-height: 1.16;
+      }
+
+      .clause {
+        margin-bottom: 1.15mm;
+        text-align: justify;
+      }
+
+      .clause.mt, .clause.hl, .clause.info {
+        margin-top: 1.2mm !important;
+      }
+
+      .clause.hl {
+        border-left: 1px solid #d6cac0;
+        background: transparent !important;
+        padding-left: 2.5mm;
+      }
+
+      .clause.info {
+        border-left: 1px solid #e0d7cf;
+        background: transparent !important;
+        font-size: 7.4pt;
+      }
+
+      .vtable {
+        width: 100%;
+        margin: 1.2mm 0 2mm;
+        border-collapse: collapse;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .vtable th {
+        background: #f7f4f1 !important;
+        color: #6b574a !important;
+        font-weight: 700;
+        border-bottom: 1px solid #d8cdc4;
+        padding: 1.1mm 1.6mm;
+        font-size: 6.2pt;
+        letter-spacing: .06em;
+      }
+
+      .vtable td {
+        border-bottom: 1px solid #ece5de;
+        padding: 1.1mm 1.6mm;
+      }
+
+      .sig-grid {
+        gap: 4mm;
+        margin-top: 2mm;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .sig-block {
+        border-top: 1px solid #d9cdc3;
+        padding-top: 2.2mm;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        min-height: 16mm;
+      }
+
+      .sig-name {
+        font-size: 9pt;
+        min-height: 3mm;
+      }
+
+      .sig-role {
+        color: #7b746d !important;
+        font-size: 6.4pt;
+        letter-spacing: .14em;
+      }
+
+      .date-row {
+        margin-bottom: 1.8mm;
+        gap: 1.5mm;
+        justify-content: center;
+        font-size: 7.5pt;
+      }
+
+      .date-row input {
+        width: 32mm;
+        text-align: center;
+      }
+
+      input, select, textarea {
+        border: 1px solid #e7e1da !important;
+        background: #fff !important;
+        color: #111 !important;
+      }
+
+      textarea {
+        min-height: 11mm !important;
+      }
+
+      .page-header, .card, .sig-grid, .vtable, .sig-block {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
     }
     @media (max-width:768px){nav{padding:1rem 1.4rem} .page-header {padding:7rem 1.5rem 3rem} .container {padding:2.2rem .9rem 4rem} .card {padding:1.6rem 1.3rem} .fg-2,.fg-3,.fg-12,.sig-grid{grid-template-columns:1fr}}
   </style>
@@ -133,14 +337,20 @@
 
   <div id="app">
     <div class="progress-bar" id="progress-bar"></div>
+    
     <nav>
+      <div class="nav-logo-wrap">
+        <img src="https://joeidalgo777.github.io/drajessica/logo.jpg" alt="Logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="nav-logo-text">Dra. Jéssica Toledo</span>
+      </div>
       <div class="nav-right">
         <span class="nav-badge">Área Administrativa</span>
+        <a href="index.html" class="nav-back">Voltar ao site</a>
       </div>
-      <a href="#" class="nav-back">Voltar ao site</a>
     </nav>
 
     <header class="page-header">
+      <img src="https://joeidalgo777.github.io/drajessica/logo.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
       <div class="header-logo-text">Dra. Jéssica Toledo</div>
       <div class="header-tag">Uso interno</div>
       <h1 class="header-title">Contrato de <em>Prestação</em> de Serviços Estéticos</h1>
@@ -208,7 +418,7 @@
           <div class="mt">
             <p class="clause">O pagamento poderá ser realizado em dinheiro, cartão de débito ou crédito, transferência bancária, PIX ou boleto bancário, conforme opção disponibilizada pela CONTRATADA no ato da contratação.</p>
             <p class="clause">Os valores contratados referem-se à reserva de agenda, estrutura, insumos, tempo técnico e disponibilidade profissional destinados à CONTRATANTE durante a vigência contratual.</p>
-            <p class="clause hl">A quitação somente será considerada efetivada após a confirmação do crédito integral em favor da CONTRATADA. Em caso de inadimplemento de qualquer parcela por prazo superior a 15 (quinze) dias corridos, a CONTRATADA poderá suspender a prestação dos serviços até a regularização do débito. Sobre a parcela em atraso incidirá multa moratória de 2% (dois por cento), mais juros de mora de 1% (um por cento) ao mês, calculados pro rata die, até o efetivo pagamento.</p>
+            <p class="clause hl">A quitação somente será considerada efetivada após a confirmação do crédito integral em favor da CONTRATADA. Em caso de inadimplemento de qualquer parcela por prazo superior a 15 (quinze) dias corridos, a CONTRATADA poderá suspender a prestação dos serviços até a regularização do débito. Sobre la parcela em atraso incidirá multa moratória de 2% (dois por cento), mais juros de mora de 1% (um por cento) ao mês, calculados pro rata die, até o efetivo pagamento.</p>
           </div>
         </div>
 
@@ -245,7 +455,7 @@
           <div class="card-title"><span class="card-num">VIII</span> Proteção de Dados Pessoais - LGPD</div>
           <p class="clause">Em conformidade com a Lei n. 13.709/2018 - Lei Geral de Proteção de Dados Pessoais (LGPD), a CONTRATADA informa e a CONTRATANTE declara estar ciente do seguinte:</p>
           <p class="clause"><b>Dados coletados:</b> nome completo, CPF, RG, data de nascimento, endereço, telefone, profissão, estado de saúde e imagens fotográficas, coletados exclusivamente para fins de execução deste contrato e prestação dos serviços contratados.</p>
-          <p class="clause"><b>Base legal e finalidade:</b> o tratamento dos dados se fundamenta no art. 7, incisos II e V, da LGPD, para execução de contrato e exercício regular de direitos, e no art. 11, inciso II, alínea "f", para dados de saúde necessários à prestação dos serviços. Os dados serão utilizados exclusivamente para elaboração e gestão do prontuário clínico, comunicação sobre agendamentos e tratamentos, cumprimento de obrigações legais e defesa em eventual processo judicial ou administrativo.</p>
+          <p class="clause"><b>Base legal e finalidade:</b> o tratamento dos dados se fundamenta no art. 7, incisos II e V, da LGPD, para execução de contrato e exercício regular de direitos, e no art. 11, inciso II, alínea "f", para dados de saúde necessários à prestação dos serviços. Os dados serão utilizados exclusivamente para elaboração e gestão do prontuário clínico, comunicação sobre agendamentos e tratamentos, cumprimento de obrigações legais e defense em eventual processo judicial ou administrativo.</p>
           <p class="clause"><b>Compartilhamento:</b> os dados não serão compartilhados com terceiros para fins comerciais. O compartilhamento ocorrerá apenas quando exigido por lei ou autoridade competente.</p>
           <p class="clause"><b>Retenção:</b> os dados serão mantidos pelo prazo mínimo de 5 (cinco) anos após o encerramento do contrato, em observância às obrigações legais de guarda de prontuários e demais normas aplicáveis.</p>
           <p class="clause"><b>Direitos da titular:</b> a CONTRATANTE poderá, a qualquer tempo, solicitar acesso, correção, portabilidade, anonimização ou eliminação de seus dados, nos termos da LGPD, mediante solicitação formal à CONTRATADA.</p>
