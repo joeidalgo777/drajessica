@@ -418,7 +418,7 @@
           <div class="mt">
             <p class="clause">O pagamento poderá ser realizado em dinheiro, cartão de débito ou crédito, transferência bancária, PIX ou boleto bancário, conforme opção disponibilizada pela CONTRATADA no ato da contratação.</p>
             <p class="clause">Os valores contratados referem-se à reserva de agenda, estrutura, insumos, tempo técnico e disponibilidade profissional destinados à CONTRATANTE durante a vigência contratual.</p>
-            <p class="clause hl">A quitação somente será considerada efetivada após a confirmação do crédito integral em favor da CONTRATADA. Em caso de inadimplemento de qualquer parcela por prazo superior a 15 (quinze) dias corridos, a CONTRATADA poderá suspender a prestação dos serviços até a regularização do débito. Sobre la parcela em atraso incidirá multa moratória de 2% (dois por cento), mais juros de mora de 1% (um por cento) ao mês, calculados pro rata die, até o efetivo pagamento.</p>
+            <p class="clause hl">A quitação somente será considerada efetivada após a confirmação do crédito integral em favor da CONTRATADA. Em caso de inadimplemento de qualquer parcela por prazo superior a 15 (quinze) dias corridos, a CONTRATADA poderá suspender a prestação dos serviços até a regularização do débito. Sobre a parcela em atraso incidirá multa moratória de 2% (dois por cento), mais juros de mora de 1% (um por cento) ao mês, calculados pro rata die, até o efetivo pagamento.</p>
           </div>
         </div>
 
@@ -525,6 +525,11 @@
       }
     }
     document.getElementById('pwd').addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+
+    // espelhamento em tempo real do nome para a linha de assinatura
+    document.getElementById('nome').addEventListener('input', function(){
+      document.getElementById('sig-nome').textContent = this.value.trim() || '________________________________';
+    });
 
     // masks
     document.getElementById('cpf').addEventListener('input', function(){
